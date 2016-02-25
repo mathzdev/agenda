@@ -1,0 +1,170 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: matheuslucio
+ * Date: 25/10/15
+ * Time: 08:54
+ */
+?>
+<!-- begin PAGE TITLE AREA -->
+<!-- Use this section for each page's title and breadcrumb layout. In this example a date range picker is included within the breadcrumb. -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-title">
+            <h1>Erro
+                <small>Erro 404</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active"><i class="fa fa-cog"></i> Erros</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<!-- end PAGE TITLE AREA -->
+
+<div class="row">
+    <!-- Inline Form Example -->
+    <!-- .col-lg-12 (open) -->
+    <div class="col-lg-12">
+        <div class="portlet portlet-red">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h4><?php echo $this->translate('A 404 error occurred') ?></h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#inlineFormExample"><i
+                            class="fa fa-chevron-down"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="inlineFormExample" class="panel-collapse collapse in">
+                <div class="portlet-body">
+
+                    <h2><?php echo $this->message ?></h2>
+
+                    <?php if (isset($this->reason) && $this->reason): ?>
+
+                        <?php
+                        $reasonMessage = '';
+                        switch ($this->reason) {
+                            case 'error-controller-cannot-dispatch':
+                                $reasonMessage = $this->translate('The requested controller was unable to dispatch the request.');
+                                break;
+                            case 'error-controller-not-found':
+                                $reasonMessage = $this->translate('The requested controller could not be mapped to an existing controller class.');
+                                break;
+                            case 'error-controller-invalid':
+                                $reasonMessage = $this->translate('The requested controller was not dispatchable.');
+                                break;
+                            case 'error-router-no-match':
+                                $reasonMessage = $this->translate('The requested URL could not be matched by routing.');
+                                break;
+                            default:
+                                $reasonMessage = $this->translate('We cannot determine at this time why a 404 was generated.');
+                                break;
+                        }
+                        ?>
+
+                        <p><?php echo $reasonMessage ?></p>
+
+                    <?php endif ?>
+
+                    <?php if (isset($this->controller) && $this->controller): ?>
+
+                        <dl>
+                            <dt><?php echo $this->translate('Controller') ?>:</dt>
+                            <dd><?php echo $this->escapeHtml($this->controller) ?>
+                                <?php
+                                if (isset($this->controller_class)
+                                    && $this->controller_class
+                                    && $this->controller_class != $this->controller
+                                ) {
+                                    echo '(' . sprintf($this->translate('resolves to %s'), $this->escapeHtml($this->controller_class)) . ')';
+                                }
+                                ?>
+                            </dd>
+                        </dl>
+
+                    <?php endif ?>
+
+                    <?php if (isset($this->display_exceptions) && $this->display_exceptions): ?>
+
+                        <?php if (isset($this->exception) && $this->exception instanceof Exception): ?>
+                            <hr/>
+                            <h2><?php echo $this->translate('Additional information') ?>:</h2>
+                            <h3><?php echo get_class($this->exception); ?></h3>
+                            <dl>
+                                <dt><?php echo $this->translate('File') ?>:</dt>
+                                <dd>
+                                    <pre class="prettyprint linenums"><?php echo $this->exception->getFile() ?>
+                                        :<?php echo $this->exception->getLine() ?></pre>
+                                </dd>
+                                <dt><?php echo $this->translate('Message') ?>:</dt>
+                                <dd>
+                                    <pre class="prettyprint linenums"><?php echo $this->exception->getMessage() ?></pre>
+                                </dd>
+                                <dt><?php echo $this->translate('Stack trace') ?>:</dt>
+                                <dd>
+                                    <pre
+                                        class="prettyprint linenums"><?php echo $this->exception->getTraceAsString() ?></pre>
+                                </dd>
+                            </dl>
+                            <?php
+                            $e = $this->exception->getPrevious();
+                            $icount = 0;
+                            if ($e) :
+                                ?>
+                                <hr/>
+                                <h2><?php echo $this->translate('Previous exceptions') ?>:</h2>
+                                <ul class="unstyled">
+                                    <?php while ($e) : ?>
+                                        <li>
+                                            <h3><?php echo get_class($e); ?></h3>
+                                            <dl>
+                                                <dt><?php echo $this->translate('File') ?>:</dt>
+                                                <dd>
+                                                    <pre class="prettyprint linenums"><?php echo $e->getFile() ?>
+                                                        :<?php echo $e->getLine() ?></pre>
+                                                </dd>
+                                                <dt><?php echo $this->translate('Message') ?>:</dt>
+                                                <dd>
+                                                    <pre
+                                                        class="prettyprint linenums"><?php echo $e->getMessage() ?></pre>
+                                                </dd>
+                                                <dt><?php echo $this->translate('Stack trace') ?>:</dt>
+                                                <dd>
+                                                    <pre
+                                                        class="prettyprint linenums"><?php echo $e->getTraceAsString() ?></pre>
+                                                </dd>
+                                            </dl>
+                                        </li>
+                                        <?php
+                                        $e = $e->getPrevious();
+                                        $icount += 1;
+                                        if ($icount >= 50) {
+                                            echo "<li>There may be more exceptions, but we have no enough memory to proccess it.</li>";
+                                            break;
+                                        }
+                                    endwhile;
+                                    ?>
+                                </ul>
+                            <?php endif; ?>
+
+                        <?php else: ?>
+
+                            <h3><?php echo $this->translate('No Exception available') ?></h3>
+
+                        <?php endif ?>
+
+                    <?php endif ?>
+
+                </div>
+            </div>
+        </div>
+        <!-- /.portlet -->
+    </div>
+    <!-- /.col-lg-12 (nested) -->
+    <!-- End Inline Form Example -->
+</div>

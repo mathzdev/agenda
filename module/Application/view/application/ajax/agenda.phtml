@@ -1,0 +1,37 @@
+<?php
+date_default_timezone_set('America/Sao_Paulo');
+$dias_da_semana = array(
+    'Domingo',
+    'Segunda',
+    'Ter&ccedil;a',
+    'Quarta',
+    'Quinta',
+    'Sexta',
+    'S&aacute;bado'
+);
+
+foreach ($this->agenda as $evento) {
+    $w = date('w', $evento['dt_evento_inicio']);
+    $dm = date('d/m', $evento['dt_evento_inicio']);
+    $h = date('H', $evento['dt_evento_inicio']);
+    $v = $dias_da_semana[$w];
+    ?>
+    <div class="dt-sc-one-fifth column first">
+        <div class="event-thumb"><a href="javascript:void(0);"
+                                    title="<?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?>"
+                                    class="zoom"
+                                    data-gal="prettyPhoto[gallery]"><img
+                    src="http://<?php echo $_SERVER['HTTP_HOST']; ?><?php echo $evento['foto_cantor']; ?>"
+                    class="attachment-catalog-full wp-post-image"
+                    alt="<?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?>"
+                    title="<?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?>"
+                    height="150" width="150"></a></div>
+        <h2><a href="javascript:;"><?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?></a></h2>
+
+        <div class="event-meta fa fa-calendar"><?php echo $dm . ' ' . $v . ' &agrave;s ' . $h . 'hs'; ?></div>
+        <div class="event-excerpt">
+            <p><?php echo htmlentities(utf8_encode($evento['descricao_cantor'])); ?></p>
+        </div>
+    </div>
+
+<?php } ?>

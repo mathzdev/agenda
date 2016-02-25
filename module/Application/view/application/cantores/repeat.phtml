@@ -1,0 +1,40 @@
+<div class="col-md-2">
+    <span style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;"><?php echo $this->id; ?>
+        Dia: </span>
+</div>
+
+<div class="col-md-4">
+    Inicio:
+    <div class="input-append bootstrap-timepicker input-group">
+        <input id="dataini<?php echo $this->id; ?>" name="dataini[]" class="form-control pickerclass" type="text"/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default add-on" type="button"
+                                                    onclick="jQuery('#dataini<?php echo $this->id; ?>').focus();"><i
+                                                    class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+    </div>
+</div>
+
+<div class="col-md-4">
+    Fim:
+    <div class="input-append bootstrap-timepicker input-group">
+        <input id="datafim<?php echo $this->id; ?>" name="datafim[]" class="form-control pickerclass" type="text"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default add-on" type="button"
+                                                onclick="jQuery('#datafim<?php echo $this->id; ?>').focus();"><i
+                                                class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+    </div>
+</div>
+
+<div class="col-md-2">
+    <a
+        style="font-weight: bold;font-size: 16px; float: left;margin-top: 24px;cursor:pointer;"
+        onclick="maisDias()" href="javascript:void(0);"><i
+            class="fa fa-plus"></i> Mais
+        Dias</a>
+</div>
+
+<div style="clear:both;height:8px;"></div>

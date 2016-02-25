@@ -1,0 +1,247 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: matheuslucio
+ * Date: 25/10/15
+ * Time: 08:54
+ */
+?>
+<script type="text/javascript">
+    setTimeout(function () {
+        jQuery(document).ready(function () {
+            jQuery('.pickerclass').datetimepicker({
+                locale: 'pt-br'
+            });
+        });
+    }, 1000);
+</script>
+<!-- begin PAGE TITLE AREA -->
+<!-- Use this section for each page's title and breadcrumb layout. In this example a date range picker is included within the breadcrumb. -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-title">
+            <h1>Cantores
+                <small>Marcar Dia Cantor</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active"><i class="fa fa-users"></i> Cantores</li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<!-- end PAGE TITLE AREA -->
+
+<div class="row">
+    <!-- Horizontal Form Example -->
+    <div class="col-lg-12">
+        <?php
+        if ($this->mensagem != null)
+        {
+            echo '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Atenção!</strong> ' . $this->mensagem . '</div>';
+        }
+        ?>
+        <a href="/cantores" class="btn btn-default btn-square">Listar Cantores</a>
+        <br/>
+        <br/>
+
+        <div class="portlet portlet-green">
+            <div class="portlet-heading">
+                <div class="portlet-title">
+                    <h4>Marcar Dia Cantor</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#horizontalFormExample"><i
+                            class="fa fa-chevron-down"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="horizontalFormExample" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                    <form class="form-horizontal" role="form" method="POST" name="upload-form"
+                          enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Nome</label>
+
+                            <div class="col-sm-10">
+                                <label
+                                    class="radio-inline"><?php echo utf8_encode($this->cantor->getNomeCantor()); ?></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Descrição</label>
+
+                            <div class="col-sm-10">
+                                <label class="radio-inline"><?php echo $this->cantor->getDescricaoCantor(); ?></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Foto</label>
+
+                            <div class="col-sm-10">
+                                <label class="radio-inline"><img src="<?php echo $this->cantor->getFotoCantor(); ?>"
+                                                                 style="max-width: 200px"></label>
+                            </div>
+                        </div>
+
+                        <h1>Dias Marcados</h1>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4>Selecionar Hora e Dia:</h4>
+                                <br/>
+                                <?php if (count($this->dias) == 0) { ?>
+                                <div id="repeat-dias">
+                                    <div class="col-md-2">
+                                        <span style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;">1 Dia: </span>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        Inicio:
+                                        <div class="input-append bootstrap-timepicker input-group">
+                                            <input id="dataini1" name="dataini[]" class="form-control pickerclass"
+                                                   type="text"/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default add-on" type="button"
+                                                    onclick="jQuery('#dataini1').focus();"><i
+                                                    class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        Fim:
+                                        <div class="input-append bootstrap-timepicker input-group">
+                                            <input id="datafim1" name="datafim[]" class="form-control pickerclass"
+                                                   type="text"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default add-on" type="button"
+                                                onclick="jQuery('#datafim1').focus();"><i
+                                                class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <a
+                                            style="font-weight: bold;font-size: 16px; float: left;margin-top: 24px;cursor:pointer;"
+                                            onclick="maisDias()" href="javascript:void(0);"><i
+                                                class="fa fa-plus"></i> Mais
+                                            Dias</a>
+                                    </div>
+
+                                    <div style="clear:both;height:4px;"></div>
+                                    <?php } else { ?>
+                                        <div id="repeat-dias">
+                                            <?php foreach ($this->dias as $key => $dia) {
+                                                $diaInt = $key + 1; ?>
+                                                <div class="col-md-2">
+                                            <span
+                                                style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;"><?php echo $diaInt; ?>
+                                                Dia: </span>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    Inicio:
+                                                    <div class="input-append bootstrap-timepicker input-group">
+                                                        <input id="dataini<?php echo $diaInt; ?>" name="dataini[]"
+                                                               class="form-control pickerclass"
+                                                               value="<?php echo date('d/m/Y H:i', $dia->getDtEventoInicio()); ?>"
+                                                               type="text"/>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default add-on" type="button"
+                                                    onclick="jQuery('#dataini<?php echo $diaInt; ?>').focus();"><i
+                                                    class="fa fa-calendar"></i>
+                                            </button>
+                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    Fim:
+                                                    <div class="input-append bootstrap-timepicker input-group">
+                                                        <input id="datafim<?php echo $diaInt; ?>" name="datafim[]"
+                                                               class="form-control pickerclass"
+                                                               value="<?php echo date('d/m/Y H:i', $dia->getDtEventoFim()); ?>"
+                                                               type="text"/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default add-on" type="button"
+                                                onclick="jQuery('#datafim<?php echo $diaInt; ?>').focus();"><i
+                                                class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <a
+                                                        style="font-weight: bold;font-size: 16px; float: left;margin-top: 24px;cursor:pointer;"
+                                                        onclick="maisDias()" href="javascript:void(0);"><i
+                                                            class="fa fa-plus"></i> Mais
+                                                        Dias</a>
+                                                </div>
+
+                                                <div style="clear:both;height:8px;"></div>
+                                            <?php } // fim foreach ?>
+                                        </div>
+                                    <?php } // fim if ?>
+
+                                    <?php if (count($this->dias) == 0) { ?>
+                                        <input type="hidden" id="numRepeat" value="1"/>
+                                    <?php } else { ?>
+                                        <input type="hidden" id="numRepeat" value="<?php echo count($this->dias); ?>"/>
+                                    <?php } ?>
+                                </div>
+
+                                <div class="col-md-6">
+                                    &nbsp;
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-8">
+                                    <button type="submit" class="btn btn-lg btn-default btn-square">Salvar Agenda
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- /.portlet -->
+    </div>
+    <!-- /.col-lg-12 (nested) -->
+    <!-- End Horizontal Form Example -->
+    <script type="text/javascript">
+        function maisDias() {
+            var numRepeat = parseInt(jQuery('#numRepeat').val()) + 1;
+
+            var resposta;
+
+            jQuery.ajax({
+                type: "GET",
+                url: "/cantores/repeat/" + numRepeat,
+                async: false,
+                success: function (text) {
+                    jQuery('#numRepeat').val(numRepeat);
+                    resposta = text;
+                }
+            });
+
+            jQuery('#repeat-dias').append(resposta);
+
+            jQuery(document).ready(function () {
+                jQuery('.pickerclass').datetimepicker({
+                    locale: 'pt-br'
+                });
+            });
+
+            return true;
+        }
+    </script>
+</div>

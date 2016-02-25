@@ -1,0 +1,285 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: matheuslucio
+ * Date: 25/10/15
+ * Time: 08:54
+ */
+
+$abstractController = new \Application\Controller\AbstractController();
+$routeParam = explode('/', $_SERVER['REQUEST_URI']);
+$routeName = $routeParam[1];
+$sessionUser = $abstractController->getUserSession();
+?>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Agenda</title>
+
+    <!-- PACE LOAD BAR PLUGIN - This creates the subtle load bar effect at the top of the page. -->
+    <link href="/css/plugins/pace/pace.css" rel="stylesheet">
+    <script src="/js/plugins/pace/pace.js"></script>
+
+    <!-- GLOBAL STYLES - Include these on every page. -->
+    <link href="/css/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic'
+          rel="stylesheet" type="text/css">
+    <link
+        href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel="stylesheet" type="text/css">
+    <link href="/ico/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- PAGE LEVEL PLUGIN STYLES -->
+    <link href="/css/plugins/messenger/messenger.css" rel="stylesheet">
+    <link href="/css/plugins/messenger/messenger-theme-flat.css" rel="stylesheet">
+    <link href="/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="/css/plugins/morris/morris.css" rel="stylesheet">
+    <link href="/css/plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <link href="/css/plugins/datatables/datatables.css" rel="stylesheet">
+    <link href="/css/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet">
+    <link href="/css/plugins/bootstrap-datepicker/datepicker3.css" rel="stylesheet">
+    <link href="/css/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.css" rel="stylesheet">
+
+    <!-- THEME STYLES - Include these on every page. -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/plugins.css" rel="stylesheet">
+
+    <!-- THEME DEMO STYLES - Use these styles for reference if needed. Otherwise they can be deleted. -->
+    <link href="/css/demo.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- begin TOP NAVIGATION -->
+    <nav class="navbar-top" role="navigation">
+
+        <!-- begin BRAND HEADING -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle pull-right" data-toggle="collapse"
+                    data-target=".sidebar-collapse">
+                <i class="fa fa-bars"></i> Menu
+            </button>
+            <div class="navbar-brand">
+                <a href="/" style="color:#fff;">
+                    <i class="fa fa-calendar"></i> Agenda
+                </a>
+            </div>
+        </div>
+        <!-- end BRAND HEADING -->
+
+        <div class="nav-top">
+
+            <!-- begin LEFT SIDE WIDGETS -->
+            <ul class="nav navbar-left">
+                <li class="tooltip-sidebar-toggle">
+                    <a href="#" id="sidebar-toggle" data-toggle="tooltip" data-placement="right"
+                       title="Esconder barra lateral">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                </li>
+                <!-- You may add more widgets here using <li> -->
+            </ul>
+            <!-- end LEFT SIDE WIDGETS -->
+
+        </div>
+        <!-- /.nav-top -->
+    </nav>
+    <!-- /.navbar-top -->
+    <!-- end TOP NAVIGATION -->
+
+    <!-- begin SIDE NAVIGATION -->
+    <nav class="navbar-side" role="navigation">
+        <div class="navbar-collapse sidebar-collapse collapse">
+            <ul id="side" class="nav navbar-nav side-nav">
+                <!-- begin SIDE NAV USER PANEL -->
+                <li class="side-user hidden-xs">
+                    <p class="welcome">
+                        <i class="fa fa-key"></i> Logado como
+                    </p>
+
+                    <p class="name tooltip-sidebar-logout">
+                        <?php if ($sessionUser->logado == true) {
+                            echo $sessionUser->usuario->getUsrNome();
+                        } ?>
+                        <span
+                            class="last-name"><?php if ($sessionUser->logado == true) {
+                                echo explode('@', $sessionUser->usuario->getUsrEmail())[0];
+                            } ?></span>
+                        <a style="color: inherit" class="logout_open" href="#logout" data-toggle="tooltip"
+                           data-placement="top" title="Sair"><i class="fa fa-sign-out"></i></a>
+                    </p>
+
+                    <div class="clearfix"></div>
+                </li>
+                <!-- end SIDE NAV SEARCH -->
+                <!-- begin DASHBOARD LINK -->
+                <li>
+                    <a<?php if ($routeName == '') {
+                        echo ' class="active"';
+                    } ?> href="/">
+                        <i class="fa fa-dashboard"></i> Início
+                    </a>
+                </li>
+                <!-- end DASHBOARD LINK -->
+                <!-- begin CHARTS DROPDOWN -->
+                <li class="panel">
+                    <a<?php if (in_array($routeName, array('meus-dados', 'usuarios'))) {
+                        echo ' class="active"';
+                    } ?> href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
+                         data-target="#users">
+                        <i class="fa fa-gears"></i> Sistema <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="collapse nav <?php if (in_array($routeName, array('meus-dados', 'usuarios'))) {
+                        echo 'in';
+                    } ?>" id="users">
+                        <li>
+                            <a href="/meus-dados">
+                                <i class="fa fa-angle-double-right"></i> Meus Dados
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/usuarios">
+                                <i class="fa fa-angle-double-right"></i> Usuários
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- end CHARTS DROPDOWN -->
+                <li class="panel">
+                    <a<?php if ($routeName == 'cantores') {
+                        echo ' class="active"';
+                    } ?> href="/cantores">
+                        <i class="fa fa-microphone"></i> Cantores
+                    </a>
+                </li>
+                <li class="panel">
+                    <a<?php if ($routeName == 'fotos') {
+                        echo ' class="active"';
+                    } ?> href="/fotos">
+                        <i class="fa fa-camera"></i> Fotos
+                    </a>
+                </li>
+                <li class="panel">
+                    <a class="logout_open" href="#logout" data-toggle="tooltip" data-placement="top" title="Sair">
+                        <i class="fa fa-sign-out"></i> Sair
+                    </a>
+                </li>
+                <!-- end FORMS DROPDOWN -->
+            </ul>
+            <!-- /.side-nav -->
+        </div>
+        <!-- /.navbar-collapse -->
+    </nav>
+    <!-- /.navbar-side -->
+    <!-- end SIDE NAVIGATION -->
+
+    <!-- begin MAIN PAGE CONTENT -->
+    <div id="page-wrapper">
+
+        <div class="page-content">
+
+            <?php echo $this->content; ?>
+
+        </div>
+        <!-- /.page-content -->
+
+    </div>
+    <!-- /#page-wrapper -->
+    <!-- end MAIN PAGE CONTENT -->
+
+</div>
+<!-- /#wrapper -->
+
+<!-- GLOBAL SCRIPTS -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/js/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="/js/plugins/popupoverlay/jquery.popupoverlay.js"></script>
+<script src="/js/plugins/popupoverlay/defaults.js"></script>
+<!-- Logout Notification Box -->
+<div id="logout">
+    <div class="logout-message">
+        <br/>
+
+        <h3>
+            <i class="fa fa-sign-out text-green"></i> Deseja sair?
+        </h3>
+
+        <p>Clique em "Sair" para finalizar sua sessão atual.</p>
+        <ul class="list-inline">
+            <li>
+                <a href="/autenticacao/logout" class="btn btn-green">
+                    <strong>Sair</strong>
+                </a>
+            </li>
+            <li>
+                <button class="logout_close btn btn-green">Cancelar</button>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /#logout -->
+<!-- Moment -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment-with-locales.min.js"></script>
+<script src="/js/plugins/bootstrap-datetimepicker/bootstrap-datetimepicker.js"></script>
+<!-- Logout Notification jQuery -->
+<script src="/js/plugins/popupoverlay/logout.js"></script>
+<!-- HISRC Retina Images -->
+<script src="/js/plugins/hisrc/hisrc.js"></script>
+<!-- PAGE LEVEL PLUGIN SCRIPTS -->
+<!-- HubSpot Messenger -->
+<script src="/js/plugins/messenger/messenger.min.js"></script>
+<script src="/js/plugins/messenger/messenger-theme-flat.js"></script>
+<!-- Date Range Picker -->
+<script src="/js/plugins/daterangepicker/moment.js"></script>
+<script src="/js/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Morris Charts -->
+<script src="/js/plugins/morris/raphael-2.1.0.min.js"></script>
+<script src="/js/plugins/morris/morris.js"></script>
+<!-- Flot Charts -->
+<script src="/js/plugins/flot/jquery.flot.js"></script>
+<script src="/js/plugins/flot/jquery.flot.resize.js"></script>
+<!-- Sparkline Charts -->
+<script src="/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- Moment.js -->
+<script src="/js/plugins/moment/moment.min.js"></script>
+<!-- jQuery Vector Map -->
+<script src="/js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+<script src="/js/plugins/jvectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+<script src="/js/demo/map-demo-data.js"></script>
+<!-- Easy Pie Chart -->
+<script src="/js/plugins/easypiechart/jquery.easypiechart.min.js"></script>
+<!-- DataTables -->
+<script src="/js/plugins/datatables/jquery.dataTables.js"></script>
+<script src="/js/plugins/datatables/datatables-bs3.js"></script>
+<!-- THEME SCRIPTS -->
+<script src="/js/demo/dashboard-demo.js"></script>
+<script src="/js/demo/dashboard-demo.js"></script>
+<script src="/js/demo/advanced-tables-demo.js"></script>
+<script src="/js/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+<script src="/js/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="/js/demo/jquery.mask.min.js"></script>
+<!-- Morris Demo/Dummy Data -->
+<script src="/js/plugins/morris/morris-demo-data.js"></script>
+<script src="/js/flex.js"></script>
+<script src="/js/demo/notifications-demo.js"></script>
+
+</body>
+
+</html>
