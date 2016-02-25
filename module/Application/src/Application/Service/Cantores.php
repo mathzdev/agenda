@@ -45,8 +45,8 @@ class Cantores extends AbstractService
         $entidade = $this->getEntity('Application\Entity\TbCantor');
 
         try {
-            $entidade->setNomeCantor(utf8_encode($arrInsert['nomeCantor']));
-            $entidade->setDescricaoCantor(utf8_encode($arrInsert['descricaoCantor']));
+            $entidade->setNomeCantor(utf8_decode($arrInsert['nomeCantor']));
+            $entidade->setDescricaoCantor(utf8_decode($arrInsert['descricaoCantor']));
 
             if ($arrInsert['fotoCantor'] != null) {
                 $entidade->setFotoCantor($arrInsert['fotoCantor']);
@@ -97,8 +97,8 @@ class Cantores extends AbstractService
         }
 
         try {
-            $entidade->setNomeCantor(utf8_encode($arrUpdate['nomeCantor']));
-            $entidade->setDescricaoCantor(utf8_encode($arrUpdate['descricaoCantor']));
+            $entidade->setNomeCantor(utf8_decode($arrUpdate['nomeCantor']));
+            $entidade->setDescricaoCantor(utf8_decode($arrUpdate['descricaoCantor']));
 
             if ($arrUpdate['fotoCantor'] != null) {
                 $entidade->setFotoCantor($arrUpdate['fotoCantor']);
