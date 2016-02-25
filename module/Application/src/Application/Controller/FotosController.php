@@ -24,7 +24,7 @@ class FotosController extends AbstractController
      */
     public function indexAction()
     {
-        $arrReturn = array('fotos' => $this->getService()->getRepository('Application\Entity\TbGaleriaInstagram')->findAll());
+        $arrReturn = array('fotos' => $this->getService()->getRepository('Application\Entity\TbGaleriaInstagram')->findBy(array('exibe' => 'sim')));
         return new ViewModel($arrReturn);
     }
 
