@@ -28,7 +28,6 @@ class AbstractController extends AbstractActionController
      */
     public function onDispatch(\Zend\Mvc\MvcEvent $e)
     {
-        date_default_timezone_set('America/Sao_Paulo');
         if ($this->getUserSession()->logado == false && $this->getEvent()->getRouteMatch()->getMatchedRouteName() != 'autenticacao') {
             $this->redirect()->toUrl('/autenticacao/login');
         }

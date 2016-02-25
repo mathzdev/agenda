@@ -36,6 +36,7 @@ class AjaxController extends AbstractActionController
      */
     public function agendaAction()
     {
+        header('Access-Control-Allow-Origin: *');
         $objectManager = $this
             ->getServiceLocator()
             ->get('Doctrine\ORM\EntityManager');
