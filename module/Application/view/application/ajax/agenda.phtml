@@ -21,11 +21,11 @@ foreach ($this->agenda as $evento) {
                                     title="<?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?>"
                                     class="zoom"
                                     data-gal="prettyPhoto[gallery]"><img
-                    src="http://<?php echo $_SERVER['HTTP_HOST']; ?><?php echo $evento['foto_cantor']; ?>"
+                    src="http://<?php echo $_SERVER['HTTP_HOST']; ?>/ajax/thumb?img=http://<?php echo $_SERVER['HTTP_HOST']; ?><?php echo $evento['foto_cantor']; ?>"
                     class="attachment-catalog-full wp-post-image"
                     alt="<?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?>"
                     title="<?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?>"
-                    height="150" width="150"></a></div>
+                    ></a></div>
         <h2><a href="javascript:;"><?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?></a></h2>
 
         <div class="event-meta fa fa-calendar"><?php echo $dm . ' ' . $v . ' &agrave;s ' . $h . 'hs'; ?></div>
