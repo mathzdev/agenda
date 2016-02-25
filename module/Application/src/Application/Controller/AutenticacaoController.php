@@ -95,7 +95,7 @@ class AutenticacaoController extends AbstractController
      */
     public function esqueceuSenhaAction()
     {
-        $result = new ViewModel(array('titulo' => 'Farma Loka # Esqueceu Sua Senha'));
+        $result = new ViewModel(array('titulo' => 'Agenda # Esqueceu Sua Senha'));
         $result->setTerminal(true);
 
         if ($this->isPost()) {
