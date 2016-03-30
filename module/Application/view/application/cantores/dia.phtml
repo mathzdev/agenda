@@ -37,8 +37,7 @@
     <!-- Horizontal Form Example -->
     <div class="col-lg-12">
         <?php
-        if ($this->mensagem != null)
-        {
+        if ($this->mensagem != null) {
             echo '<div class="alert alert-success alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Atenção!</strong> ' . $this->mensagem . '</div>';
         }
         ?>
@@ -94,11 +93,15 @@
                                 <br/>
                                 <?php if (count($this->dias) == 0) { ?>
                                 <div id="repeat-dias">
-                                    <div class="col-md-2">
-                                        <span style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;">1 Dia: </span>
+                                    <div class="col-md-2 remover1">
+                                        <span style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;">
+                                            <button class="btn btn-sm btn-danger" type="button"
+                                                    onclick="jQuery('.remover1').remove();"><i
+                                                    class="fa fa-trash-o"></i></button>
+                                            1 Dia: </span>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 remover1">
                                         Inicio:
                                         <div class="input-append bootstrap-timepicker input-group">
                                             <input id="dataini1" name="dataini[]" class="form-control pickerclass"
@@ -112,7 +115,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 remover1">
                                         Fim:
                                         <div class="input-append bootstrap-timepicker input-group">
                                             <input id="datafim1" name="datafim[]" class="form-control pickerclass"
@@ -126,7 +129,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-2">
+                                    <div class="col-md-2 remover1">
                                         <a
                                             style="font-weight: bold;font-size: 16px; float: left;margin-top: 24px;cursor:pointer;"
                                             onclick="maisDias()" href="javascript:void(0);"><i
@@ -139,13 +142,16 @@
                                         <div id="repeat-dias">
                                             <?php foreach ($this->dias as $key => $dia) {
                                                 $diaInt = $key + 1; ?>
-                                                <div class="col-md-2">
+                                                <div class="col-md-2 remover<?php echo $diaInt; ?>">
                                             <span
-                                                style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;"><?php echo $diaInt; ?>
+                                                style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;">
+                                                <button class="btn btn-sm btn-danger" type="button"
+                                                        onclick="jQuery('.remover<?php echo $diaInt; ?>').remove();"><i
+                                                        class="fa fa-trash-o"></i></button> <?php echo $diaInt; ?>
                                                 Dia: </span>
                                                 </div>
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 remover<?php echo $diaInt; ?>">
                                                     Inicio:
                                                     <div class="input-append bootstrap-timepicker input-group">
                                                         <input id="dataini<?php echo $diaInt; ?>" name="dataini[]"
@@ -161,7 +167,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-4">
+                                                <div class="col-md-4 remover<?php echo $diaInt; ?>">
                                                     Fim:
                                                     <div class="input-append bootstrap-timepicker input-group">
                                                         <input id="datafim<?php echo $diaInt; ?>" name="datafim[]"
@@ -177,7 +183,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-2">
+                                                <div class="col-md-2 remover<?php echo $diaInt; ?>">
                                                     <a
                                                         style="font-weight: bold;font-size: 16px; float: left;margin-top: 24px;cursor:pointer;"
                                                         onclick="maisDias()" href="javascript:void(0);"><i

@@ -1,9 +1,11 @@
-<div class="col-md-2">
-    <span style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;"><?php echo $this->id; ?>
+<div class="col-md-2 remover<?php echo $this->id; ?>">
+    <span style="font-weight: bold;font-size: 16px; float: right;margin-top: 24px;">
+        <button class="btn btn-sm btn-danger" type="button" onclick="jQuery('.remover<?php echo $this->id; ?>').remove();"><i class="fa fa-trash-o"></i></button>
+        <?php echo $this->id; ?>
         Dia: </span>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4 remover<?php echo $this->id; ?>">
     Inicio:
     <div class="input-append bootstrap-timepicker input-group">
         <input id="dataini<?php echo $this->id; ?>" name="dataini[]" class="form-control pickerclass" type="text"/>
@@ -16,7 +18,7 @@
     </div>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4 remover<?php echo $this->id; ?>">
     Fim:
     <div class="input-append bootstrap-timepicker input-group">
         <input id="datafim<?php echo $this->id; ?>" name="datafim[]" class="form-control pickerclass" type="text"/>
@@ -29,7 +31,7 @@
     </div>
 </div>
 
-<div class="col-md-2">
+<div class="col-md-2 remover<?php echo $this->id; ?>">
     <a
         style="font-weight: bold;font-size: 16px; float: left;margin-top: 24px;cursor:pointer;"
         onclick="maisDias()" href="javascript:void(0);"><i
@@ -37,4 +39,4 @@
         Dias</a>
 </div>
 
-<div style="clear:both;height:8px;"></div>
+<div style="clear:both;height:8px;" class="remover<?php echo $this->id; ?>"></div>
