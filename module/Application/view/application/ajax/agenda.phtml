@@ -1,6 +1,6 @@
-<div class="dt-sc-one-sixth column first" style="margin-right: 6px;">
-    <img src="http://paraibacarnedesol.com.br/wp-content/uploads/2016/04/forronejo-abril.png">
-</div>
+<!--<div class="dt-sc-one-sixth column first" style="margin-right: 6px;">-->
+<!--    <img src="http://paraibacarnedesol.com.br/wp-content/uploads/2016/04/forronejo-abril.png">-->
+<!--</div>-->
 <?php
 date_default_timezone_set('America/Sao_Paulo');
 $dias_da_semana = array(
@@ -19,7 +19,7 @@ foreach ($this->agenda as $evento) {
     $h = date('H', $evento['dt_evento_inicio']);
     $v = $dias_da_semana[$w];
     ?>
-    <div class="dt-sc-one-sixth column first">
+    <div class="dt-sc-one-fifth column first">
         <div class="event-thumb"><a href="javascript:void(0);"
                                     title="<?php echo htmlentities(utf8_encode($evento['nome_cantor'])); ?>"
                                     class="zoom"
