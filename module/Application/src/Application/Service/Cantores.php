@@ -50,6 +50,8 @@ class Cantores extends AbstractService
 
             if ($arrInsert['fotoCantor'] != null) {
                 $entidade->setFotoCantor($arrInsert['fotoCantor']);
+            } else {
+                $entidade->setFotoCantor('');
             }
 
             $this->getEntityManager()->persist($entidade);
