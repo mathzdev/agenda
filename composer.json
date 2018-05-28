@@ -9,10 +9,7 @@
     "homepage": "http://framework.zend.com/",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.3.*",
-        "doctrine/doctrine-orm-module": "0.7.*",
-        "zendframework/zend-developer-tools": "dev-master",
-        "phpdocumentor/phpdocumentor": "2.*",
-        "dino/dompdf-module": "dev-master"
+        "zendframework/zendframework": "2.3.9",
+        "doctrine/doctrine-orm-module": "0.7.0"
     }
 }
