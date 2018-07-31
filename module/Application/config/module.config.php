@@ -106,6 +106,21 @@ return array(
                     ),
                 ),
             ),
+            'produtos' => array(
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => array(
+                    'route' => '/produtos[/:action][/:id]',
+                    'constraints' => array(
+                        'controller' => 'Application\Controller\Produtos',
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Produtos',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
             'ajax' => array(
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => array(
@@ -178,6 +193,7 @@ return array(
             'Application\Controller\CmsUsuario' => 'Application\Controller\CmsUsuarioController',
             'Application\Controller\Cantores' => 'Application\Controller\CantoresController',
             'Application\Controller\Fotos' => 'Application\Controller\FotosController',
+            'Application\Controller\Produtos' => 'Application\Controller\ProdutosController',
             'Application\Controller\Ajax' => 'Application\Controller\AjaxController',
         ),
     ),

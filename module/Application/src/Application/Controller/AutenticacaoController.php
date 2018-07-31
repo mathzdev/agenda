@@ -50,7 +50,7 @@ class AutenticacaoController extends AbstractController
      */
     public function loginAction()
     {
-        $result = new ViewModel(array('titulo' => 'Agenda # Login'));
+        $result = new ViewModel(array('titulo' => 'Paraíba Carne de Sol # Login'));
         $result->setTerminal(true);
 
         if ($this->isPost()) {
@@ -95,7 +95,7 @@ class AutenticacaoController extends AbstractController
      */
     public function esqueceuSenhaAction()
     {
-        $result = new ViewModel(array('titulo' => 'Agenda # Esqueceu Sua Senha'));
+        $result = new ViewModel(array('titulo' => 'Paraíba Carne de Sol # Esqueceu Sua Senha'));
         $result->setTerminal(true);
 
         if ($this->isPost()) {

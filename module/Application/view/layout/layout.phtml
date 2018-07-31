@@ -20,7 +20,7 @@ $sessionUser = $abstractController->getUserSession();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Agenda</title>
+    <title>Sistemas - Paraíba Carne de Sol</title>
 
     <!-- PACE LOAD BAR PLUGIN - This creates the subtle load bar effect at the top of the page. -->
     <link href="/css/plugins/pace/pace.css" rel="stylesheet">
@@ -77,7 +77,7 @@ $sessionUser = $abstractController->getUserSession();
             </button>
             <div class="navbar-brand">
                 <a href="/" style="color:#fff;">
-                    <i class="fa fa-calendar"></i> Agenda
+                    <i class="fa fa-cog"></i> Sistemas
                 </a>
             </div>
         </div>
@@ -161,18 +161,35 @@ $sessionUser = $abstractController->getUserSession();
                     </ul>
                 </li>
                 <!-- end CHARTS DROPDOWN -->
+                <!-- begin CHARTS DROPDOWN -->
+                <li class="panel">
+                    <a<?php if (in_array($routeName, array('categorias', 'produtos'))) {
+                        echo ' class="active"';
+                    } ?> href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
+                         data-target="#produtos">
+                        <i class="fa fa-cutlery"></i> Produtos <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="collapse nav <?php if (in_array($routeName, array('categorias', 'produtos'))) {
+                        echo 'in';
+                    } ?>" id="produtos">
+                        <li>
+                            <a href="/produtos">
+                                <i class="fa fa-angle-double-right"></i> Produtos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/categorias">
+                                <i class="fa fa-angle-double-right"></i> Categorias
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- end CHARTS DROPDOWN -->
                 <li class="panel">
                     <a<?php if ($routeName == 'cantores') {
                         echo ' class="active"';
                     } ?> href="/cantores">
                         <i class="fa fa-microphone"></i> Cantores
-                    </a>
-                </li>
-                <li class="panel">
-                    <a<?php if ($routeName == 'fotos') {
-                        echo ' class="active"';
-                    } ?> href="/fotos">
-                        <i class="fa fa-camera"></i> Fotos
                     </a>
                 </li>
                 <li class="panel">

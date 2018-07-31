@@ -12,11 +12,13 @@ namespace Application\Controller;
 use Zend\View\Model\ViewModel;
 
 /**
- * Class IndexController
+ * Class ProdutosController
  * @package Application\Controller
  */
-class IndexController extends AbstractController
+class ProdutosController extends AbstractController
 {
+    private $produtoService = 'Application\Service\Produto';
+
     /**
      * Rota inicial do modulo
      *
@@ -24,10 +26,15 @@ class IndexController extends AbstractController
      */
     public function indexAction()
     {
-        $arrReturn = array();
-        $arrReturn['countCantores'] = count($this->getService('Application\Service\AbstractService')->getRepository('Application\Entity\TbCantor')->findAll());
-        $arrReturn['countDias'] = count($this->getService('Application\Service\AbstractService')->getRepository('Application\Entity\TbEvento')->findAll());
-        $arrReturn['countProdutos'] = count($this->getService('Application\Service\AbstractService')->getRepository('Application\Entity\TbProduto')->findAll());
+        $arrReturn = array('produtos' => $this->getService($this->produtoService)->getRepository('Application\Entity\TbProduto')->findAll());
         return new ViewModel($arrReturn);
+    }
+
+    /**
+     * Rota do importador
+     */
+    public function importadorAction()
+    {
+        return $this->getService($this->produtoService)->importarProdutos();
     }
 }
