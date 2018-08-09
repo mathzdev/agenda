@@ -5,6 +5,8 @@
  */
 chdir(dirname(__DIR__));
 
+set_time_limit(60 * 5);
+
 $env = getenv('APPLICATION_ENV') ?: 'production';
 
 if ($env == "development") {

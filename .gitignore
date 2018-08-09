@@ -3,3 +3,4 @@ vendor/
 *.php~
 .DS_Store
 composer.lock
+public/data/

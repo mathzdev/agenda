@@ -8,6 +8,8 @@
 
 namespace Application\Service;
 
+use Application\Entity\TbProduto;
+
 /**
  * Class Produto
  * @package Application\Service
@@ -16,7 +18,48 @@ class Produto extends AbstractService
 {
     public function importarProdutos()
     {
-        print_r(array('key' => 'value'));
+        $arrProdutos = $this->getProdutosXml();
+        $min = 0;
+        $max = count($arrProdutos);
+
+        try {
+            foreach ($arrProdutos as $produto) {
+                if ($min < $max) {
+                    $produto->codCardapio = strlen($produto->codCardapio) == 2 ? '0' . $produto->codCardapio : $produto->codCardapio;
+
+                    $entidade = $this->getEntity('Application\Entity\TbProduto');
+
+                    $diretorioUpload = getcwd() . '/public/data/';
+                    $destinoImg = md5(time()) . '.' . pathinfo($produto->img, PATHINFO_EXTENSION);
+
+                    file_put_contents($diretorioUpload . $destinoImg, file_get_contents($produto->img));
+
+                    $entidade->setCodCardapio($produto->codCardapio);
+                    $entidade->setNome(str_replace($produto->codCardapio . ' - ', '', trim($produto->titulo)));
+                    $entidade->setDescricao(trim($produto->descricao));
+                    $entidade->setValor(str_replace('R$', '', trim($produto->meta->price)));
+                    $entidade->setIdCategoriaProduto($this->getRepository('Application\Entity\TbCategoriaProduto')->find((int)$produto->category));
+                    $entidade->setImg('/data/' . $destinoImg);
+
+                    if (isset($produto->meta->subtitle)) {
+                        $entidade->setResumo($produto->meta->subtitle);
+                    }
+
+                    $this->getEntityManager()->persist($entidade);
+                    $this->getEntityManager()->flush();
+                }
+
+                $min++;
+            }
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
         exit;
+    }
+
+    public function getProdutosXml()
+    {
+        $url = 'http://paraibacarnedesol.com.br/exportar-xml/';
+        return json_decode(file_get_contents($url));
     }
 }

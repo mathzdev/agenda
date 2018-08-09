@@ -24,6 +24,13 @@ class TbProduto
     /**
      * @var string
      *
+     * @ORM\Column(name="cod_cardapio", type="integer", nullable=false)
+     */
+    private $codCardapio;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="nome", type="string", length=200, nullable=true)
      */
     private $nome;
@@ -45,7 +52,7 @@ class TbProduto
     /**
      * @var string
      *
-     * @ORM\Column(name="resumo", type="string", length=100, nullable=true)
+     * @ORM\Column(name="resumo", type="string", length=200, nullable=true)
      */
     private $resumo;
 
@@ -71,11 +78,34 @@ class TbProduto
     /**
      * Get idProduto
      *
-     * @return integer 
+     * @return integer
      */
     public function getIdProduto()
     {
         return $this->idProduto;
+    }
+
+    /**
+     * Set codCardapio
+     *
+     * @param string $codCardapio
+     * @return TbProduto
+     */
+    public function setcodCardapio($codCardapio)
+    {
+        $this->codCardapio = $codCardapio;
+
+        return $this;
+    }
+
+    /**
+     * Get codCardapio
+     *
+     * @return string
+     */
+    public function getcodCardapio()
+    {
+        return $this->codCardapio;
     }
 
     /**
@@ -94,7 +124,7 @@ class TbProduto
     /**
      * Get nome
      *
-     * @return string 
+     * @return string
      */
     public function getNome()
     {
@@ -117,7 +147,7 @@ class TbProduto
     /**
      * Get img
      *
-     * @return string 
+     * @return string
      */
     public function getImg()
     {
@@ -140,7 +170,7 @@ class TbProduto
     /**
      * Get descricao
      *
-     * @return string 
+     * @return string
      */
     public function getDescricao()
     {
@@ -163,7 +193,7 @@ class TbProduto
     /**
      * Get resumo
      *
-     * @return string 
+     * @return string
      */
     public function getResumo()
     {
@@ -186,7 +216,7 @@ class TbProduto
     /**
      * Get valor
      *
-     * @return string 
+     * @return string
      */
     public function getValor()
     {
@@ -209,7 +239,7 @@ class TbProduto
     /**
      * Get idCategoriaProduto
      *
-     * @return \Application\Entity\TbCategoriaProduto 
+     * @return \Application\Entity\TbCategoriaProduto
      */
     public function getIdCategoriaProduto()
     {
