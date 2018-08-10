@@ -9,6 +9,7 @@
 namespace Application\Service;
 
 use Application\Entity\TbProduto;
+use Zend\Session\Container;
 
 /**
  * Class Produto
@@ -61,5 +62,23 @@ class Produto extends AbstractService
     {
         $url = 'http://paraibacarnedesol.com.br/exportar-xml/';
         return json_decode(file_get_contents($url));
+    }
+
+    public function categoriaSessaoAtual()
+    {
+        $categoriaSession = new Container('categoria_session');
+
+        if (is_null($categoriaSession->idCategoriaAtual)) {
+            return $this->getRepository('Application\Entity\TbCategoriaProduto')->find(1);
+        } else {
+            return $this->getRepository('Application\Entity\TbCategoriaProduto')->find($categoriaSession->idCategoriaAtual);
+        }
+    }
+
+    public function mudarCategoria($idCategoriaAtual, $redirect)
+    {
+        $categoriaSession = new Container('categoria_session');
+        $categoriaSession->idCategoriaAtual = $idCategoriaAtual;
+        $redirect->toUrl('/produtos');
     }
 }

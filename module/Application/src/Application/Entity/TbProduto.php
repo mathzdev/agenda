@@ -24,7 +24,7 @@ class TbProduto
     /**
      * @var string
      *
-     * @ORM\Column(name="cod_cardapio", type="integer", nullable=false)
+     * @ORM\Column(name="cod_cardapio", type="string", nullable=false)
      */
     private $codCardapio;
 
@@ -91,7 +91,7 @@ class TbProduto
      * @param string $codCardapio
      * @return TbProduto
      */
-    public function setcodCardapio($codCardapio)
+    public function setCodCardapio($codCardapio)
     {
         $this->codCardapio = $codCardapio;
 
@@ -103,7 +103,7 @@ class TbProduto
      *
      * @return string
      */
-    public function getcodCardapio()
+    public function getCodCardapio()
     {
         return $this->codCardapio;
     }

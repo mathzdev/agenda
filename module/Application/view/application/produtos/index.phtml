@@ -11,11 +11,11 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="page-title">
-            <h1>Cantores
+            <h1>Produtos
                 <small>Listar</small>
             </h1>
             <ol class="breadcrumb">
-                <li class="active"><i class="fa fa-users"></i> Cantores</li>
+                <li class="active"><i class="fa fa-cutlery"></i> Produtos</li>
             </ol>
         </div>
     </div>
@@ -28,18 +28,38 @@
     <!-- Inline Form Example -->
     <!-- .col-lg-12 (open) -->
     <div class="col-lg-12">
-        <a href="/cantores/cadastro" class="btn btn-green btn-square">Cadastrar Cantor</a>
-        <br/>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/produtos/cadastro" class="btn btn-green btn-square">Cadastrar Produto</a>
+            </div>
+            <div class="col-md-6">
+                <div class="input-append bootstrap-timepicker input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default add-on" type="button">
+                            Visualizando Categoria:
+                        </button>
+                    </span>
+                    <select class="form-control" id="select-categoria" onchange="changeCategoria()">
+                        <?php foreach ($this->categorias as $categoria) { ?>
+                            <option value="<?php echo $categoria->getIdCategoria(); ?>"<?php if ($categoria->getIdCategoria() == $this->categoriaAtual->getIdCategoria()) {
+                                echo ' selected';
+                            } ?>>
+                                <?php echo $categoria->getIdCategoria(); ?> - <?php echo utf8_encode($categoria->getNomeCategoria()); ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+            </div>
+        </div>
         <br/>
 
         <div class="portlet portlet-default">
             <div class="portlet-heading">
                 <div class="portlet-title">
-                    <h4>Cantores</h4>
+                    <h4>Produtos</h4>
                 </div>
                 <div class="portlet-widgets">
                     <a data-toggle="collapse" data-parent="#accordion" href="#inlineFormExample"><i
-                            class="fa fa-chevron-down"></i></a>
+                                class="fa fa-chevron-down"></i></a>
                 </div>
                 <div class="clearfix"></div>
             </div>
@@ -52,34 +72,31 @@
                                 <th>Foto</th>
                                 <th>Código</th>
                                 <th>Nome</th>
-                                <th>Descrição</th>
+                                <th>Resumo</th>
+                                <th>Preço</th>
                                 <th>Ações</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <?php foreach ($this->cantores as $cantor) { ?>
+                            <?php foreach ($this->produtos as $produto) { ?>
                                 <tr>
-                                    <td><img src="<?php echo $cantor->getFotoCantor(); ?>" width="200px"/></td>
-                                    <td><?php echo $cantor->getIdCantor(); ?></td>
-                                    <td><?php echo utf8_encode($cantor->getNomeCantor()); ?></td>
-                                    <td><?php echo utf8_encode($cantor->getDescricaoCantor()); ?></td>
-                                    <td width="20%" class="tooltip-demo">
-                                        <a href="/cantores/visualiza/<?php echo $cantor->getIdCantor(); ?>"
+                                    <td><img src="<?php echo $produto->getImg(); ?>" width="100px"/></td>
+                                    <td><?php echo $produto->getCodCardapio(); ?></td>
+                                    <td><?php echo $produto->getNome(); ?></td>
+                                    <td width="15%"><?php echo $produto->getResumo(); ?></td>
+                                    <td width="10%">R$ <?php echo utf8_encode($produto->getValor()); ?></td>
+                                    <td width="30%" class="tooltip-demo">
+                                        <a href="/produtos/visualiza/<?php echo $produto->getIdProduto(); ?>"
                                            class="btn btn-purple btn-square" data-toggle="tooltip" data-placement="top"
                                            title="Visualizar"><i class="fa fa-search"></i> Visualizar</a>
-                                        <a href="/cantores/edita/<?php echo $cantor->getIdCantor(); ?>"
+                                        <a href="/produtos/edita/<?php echo $produto->getIdProduto(); ?>"
                                            class="btn btn-blue btn-square" data-toggle="tooltip" data-placement="top"
                                            title="Editar"><i class="fa fa-edit"></i> Editar</a>
                                         <a href="#delete" data-toggle="tooltip" data-placement="top" title="Deletar"
                                            class="delete_open btn btn-red btn-square"
-                                           onclick="deletaCantor(<?php echo $cantor->getIdCantor(); ?>, '<?php echo utf8_encode($cantor->getNomeCantor()); ?>');"
+                                           onclick="deletaProduto(<?php echo $produto->getIdProduto(); ?>, '<?php echo utf8_encode($produto->getNome()); ?>');"
                                            data-toggle="tooltip" data-placement="top" title="Deletar"><i
                                                 class="fa fa-trash-o"></i> Deletar</a>
-                                        <br/>
-                                        <br/>
-                                        <a href="/cantores/dia/<?php echo $cantor->getIdCantor(); ?>"
-                                           class="btn btn-success btn-square" data-toggle="tooltip" data-placement="top"
-                                           title="Marcar Dia"><i class="fa fa-plus"></i> Marcar Dia</a>
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -120,8 +137,12 @@
 <!-- /#delete -->
 
 <script>
-    function deletaCantor(id, nome) {
+    function deletaProduto(id, nome) {
         $('#nome_cliente_apagar').html(nome);
-        $('#url_cliente_apagar').attr('href', '/cantores/deleta/' + id);
+        $('#url_cliente_apagar').attr('href', '/produtos/deleta/' + id);
+    }
+
+    function changeCategoria() {
+        location.href = '/produtos/mudar-categoria/' + $('#select-categoria').val();
     }
 </script>

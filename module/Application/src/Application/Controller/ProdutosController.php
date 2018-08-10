@@ -26,7 +26,13 @@ class ProdutosController extends AbstractController
      */
     public function indexAction()
     {
-        $arrReturn = array('produtos' => $this->getService($this->produtoService)->getRepository('Application\Entity\TbProduto')->findAll());
+        $arrReturn = array(
+            'produtos' => $this->getService($this->produtoService)->getRepository('Application\Entity\TbProduto')->findBy(
+                array('idCategoriaProduto' => $this->getService($this->produtoService)->categoriaSessaoAtual())
+            ),
+            'categorias' => $this->getService($this->produtoService)->getRepository('Application\Entity\TbCategoriaProduto')->findAll(),
+            'categoriaAtual' => $this->getService($this->produtoService)->categoriaSessaoAtual()
+        );
         return new ViewModel($arrReturn);
     }
 
@@ -36,5 +42,14 @@ class ProdutosController extends AbstractController
     public function importadorAction()
     {
         return $this->getService($this->produtoService)->importarProdutos();
+    }
+
+    /**
+     * Rota para mudar categoria
+     */
+    public function mudarCategoriaAction()
+    {
+        $arrParam = $this->getParams();
+        return $this->getService($this->produtoService)->mudarCategoria($arrParam['id'], $this->redirect());
     }
 }
