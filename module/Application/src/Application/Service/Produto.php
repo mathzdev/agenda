@@ -23,6 +23,10 @@ class Produto extends AbstractService
         $min = 0;
         $max = count($arrProdutos);
 
+        if (count($this->getRepository('Application\Entity\TbProduto')->findAll()) > 0) {
+            exit('Você já importou produtos');
+        }
+
         try {
             foreach ($arrProdutos as $produto) {
                 if ($min < $max) {

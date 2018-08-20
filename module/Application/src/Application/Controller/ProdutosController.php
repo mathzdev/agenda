@@ -52,4 +52,18 @@ class ProdutosController extends AbstractController
         $arrParam = $this->getParams();
         return $this->getService($this->produtoService)->mudarCategoria($arrParam['id'], $this->redirect());
     }
+
+    /**
+     * Rota para visualizar um produto
+     *
+     * @return ViewModel
+     */
+    public function visualizaAction()
+    {
+        $arrParam = $this->getParams();
+        $produto = $this->getService($this->produtoService)->getRepository('Application\Entity\TbProduto')->find($arrParam['id']);
+        $view = new ViewModel(array('produto' => $produto));
+
+        return $view;
+    }
 }
