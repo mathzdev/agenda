@@ -44,7 +44,8 @@
                             <option value="<?php echo $categoria->getIdCategoria(); ?>"<?php if ($categoria->getIdCategoria() == $this->categoriaAtual->getIdCategoria()) {
                                 echo ' selected';
                             } ?>>
-                                <?php echo $categoria->getIdCategoria(); ?> - <?php echo utf8_encode($categoria->getNomeCategoria()); ?></option>
+                                <?php echo $categoria->getIdCategoria(); ?> - <?php echo utf8_encode($categoria->getNomeCategoria()); ?>
+                            </option>
                         <?php } ?>
                     </select>
                 </div>
@@ -121,7 +122,7 @@
             <i class="fa fa-trash-o text-green"></i> Deseja Apagar <b id="nome_cliente_apagar">--</b>?
         </h3>
 
-        <p>Clique em "Sim" para apagar este cliente.</p>
+        <p>Clique em "Sim" para apagar este produto.</p>
         <ul class="list-inline">
             <li>
                 <a href="#" class="btn btn-green" id="url_cliente_apagar">

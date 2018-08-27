@@ -66,4 +66,73 @@ class ProdutosController extends AbstractController
 
         return $view;
     }
+
+    /**
+     * Rota para cadastrar um produto
+     *
+     * @return ViewModel
+     */
+    public function cadastroAction()
+    {
+        $view = new ViewModel(array('categorias' => $this->getService($this->produtoService)->getRepository('Application\Entity\TbCategoriaProduto')->findAll()));
+
+        if ($this->isPost()) {
+            $arrPost = $this->getPost();
+            $arrFile = $this->getFiles();
+
+            $insereProduto = $this->getService($this->produtoService)->insereProduto($arrPost, $arrFile);
+
+            if ($insereProduto == true) {
+                $view->setVariable('mensagem', 'Produto cadastrado com sucesso.');
+            }
+        }
+
+        return $view;
+    }
+
+    /**
+     * Rota para editar um produto
+     *
+     * @return ViewModel
+     */
+    public function editaAction()
+    {
+        $arrParam = $this->getParams();
+        $produto = $this->getService($this->produtoService)->getRepository('Application\Entity\TbProduto')->find($arrParam['id']);
+
+        $view = new ViewModel(array('produto' => $produto, 'categorias' => $this->getService($this->produtoService)->getRepository('Application\Entity\TbCategoriaProduto')->findAll()));
+
+        if ($this->isPost()) {
+            $arrPost = $this->getPost();
+            $arrFile = $this->getFiles();
+
+            $editaProduto = $this->getService($this->produtoService)->editaProduto($arrPost, $arrFile, $arrParam['id']);
+
+            if ($editaProduto == true) {
+                $view->setVariable('mensagem', 'Produto atualizado com sucesso.');
+            }
+        }
+
+        return $view;
+    }
+
+    /**
+     * Rota para deletar um produto
+     *
+     * @return ViewModel
+     */
+    public function deletaAction()
+    {
+        $response = $this->getResponse();
+        $response->setStatusCode(200);
+        $response->setContent(null);
+        $arrParam = $this->getParams();
+        $deletaProduto = $this->getService($this->produtoService)->deletaProduto($arrParam['id']);
+
+        if ($deletaProduto == true) {
+            $this->redirect()->toRoute('produtos');
+        }
+
+        return $response;
+    }
 }
