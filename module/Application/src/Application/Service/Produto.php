@@ -110,11 +110,11 @@ class Produto extends AbstractService
         $entidade = $this->getEntity('Application\Entity\TbProduto');
 
         try {
-            $entidade->setNome(utf8_decode($arrInsert['nome']));
-            $entidade->setCodCardapio(utf8_decode($arrInsert['codigo']));
-            $entidade->setDescricao(utf8_decode($arrInsert['descricao']));
-            $entidade->setResumo(utf8_decode($arrInsert['resumo']));
-            $entidade->setValor(utf8_decode($arrInsert['valor']));
+            $entidade->setNome(utf8_encode($arrInsert['nome']));
+            $entidade->setCodCardapio(utf8_encode($arrInsert['codigo']));
+            $entidade->setDescricao(utf8_encode($arrInsert['descricao']));
+            $entidade->setResumo(utf8_encode($arrInsert['resumo']));
+            $entidade->setValor(utf8_encode($arrInsert['valor']));
 
             $categoria = $this->getRepository('Application\Entity\TbCategoriaProduto')->find($arrInsert['categoria']);
             $entidade->setIdCategoriaProduto($categoria);
@@ -161,11 +161,11 @@ class Produto extends AbstractService
         }
 
         try {
-            $entidade->setNome(utf8_decode($arrUpdate['nome']));
-            $entidade->setCodCardapio(utf8_decode($arrUpdate['codigo']));
-            $entidade->setDescricao(utf8_decode($arrUpdate['descricao']));
-            $entidade->setResumo(utf8_decode($arrUpdate['resumo']));
-            $entidade->setValor(utf8_decode($arrUpdate['valor']));
+            $entidade->setNome(utf8_encode($arrUpdate['nome']));
+            $entidade->setCodCardapio(utf8_encode($arrUpdate['codigo']));
+            $entidade->setDescricao(utf8_encode($arrUpdate['descricao']));
+            $entidade->setResumo(utf8_encode($arrUpdate['resumo']));
+            $entidade->setValor(utf8_encode($arrUpdate['valor']));
 
             $categoria = $this->getRepository('Application\Entity\TbCategoriaProduto')->find($arrUpdate['categoria']);
             $entidade->setIdCategoriaProduto($categoria);
