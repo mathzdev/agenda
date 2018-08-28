@@ -51,9 +51,9 @@ class Produto extends AbstractService
 
                     $this->getEntityManager()->persist($entidade);
                     $this->getEntityManager()->flush();
-
-                    sleep(1);
                 }
+
+                sleep(1);
 
                 $min++;
             }
