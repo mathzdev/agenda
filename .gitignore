@@ -4,4 +4,3 @@ vendor/
 .DS_Store
 composer.lock
 public/data/
-data/
