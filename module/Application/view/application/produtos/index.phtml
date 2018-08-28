@@ -84,7 +84,7 @@
                                     <td><img src="<?php echo $produto->getImg(); ?>" width="100px"/></td>
                                     <td><?php echo $produto->getCodCardapio(); ?></td>
                                     <td><?php echo utf8_decode($produto->getNome()); ?></td>
-                                    <td width="15%"><?php echo $produto->getResumo(); ?></td>
+                                    <td width="15%"><?php echo utf8_decode($produto->getResumo()); ?></td>
                                     <td width="10%">R$ <?php echo $produto->getValor(); ?></td>
                                     <td width="30%" class="tooltip-demo">
                                         <a href="/produtos/visualiza/<?php echo $produto->getIdProduto(); ?>"
