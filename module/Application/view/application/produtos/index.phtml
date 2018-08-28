@@ -44,7 +44,7 @@
                             <option value="<?php echo $categoria->getIdCategoria(); ?>"<?php if ($categoria->getIdCategoria() == $this->categoriaAtual->getIdCategoria()) {
                                 echo ' selected';
                             } ?>>
-                                <?php echo $categoria->getIdCategoria(); ?> - <?php echo utf8_encode($categoria->getNomeCategoria()); ?>
+                                <?php echo $categoria->getIdCategoria(); ?> - <?php echo $categoria->getNomeCategoria(); ?>
                             </option>
                         <?php } ?>
                     </select>

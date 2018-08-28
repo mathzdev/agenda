@@ -79,7 +79,7 @@
                                 <select class="form-control" id="categoria" name="categoria">
                                     <?php foreach ($this->categorias as $categoria) { ?>
                                         <option value="<?php echo $categoria->getIdCategoria(); ?>"<?php if ($categoria->getIdCategoria() == $this->produto->getIdCategoriaProduto()->getIdCategoria()) { echo ' selected'; } ?>>
-                                            <?php echo $categoria->getIdCategoria(); ?> - <?php echo utf8_encode($categoria->getNomeCategoria()); ?>
+                                            <?php echo $categoria->getIdCategoria(); ?> - <?php echo $categoria->getNomeCategoria(); ?>
                                         </option>
                                     <?php } ?>
                                 </select>
