@@ -53,9 +53,9 @@ class Produto extends AbstractService
                     $this->getEntityManager()->flush();
                 }
 
-                sleep(1);
-
                 $min++;
+
+                usleep(500000);
             }
         } catch (\Exception $e) {
             echo $e->getMessage();
