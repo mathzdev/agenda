@@ -52,7 +52,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Nome</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required="required" value="<?php echo $this->produto->getNome(); ?>">
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required="required" value="<?php echo utf8_decode($this->produto->getNome()); ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -64,13 +64,13 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Descrição</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" required="required" value="<?php echo $this->produto->getDescricao(); ?>">
+                                <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" required="required" value="<?php echo utf8_decode($this->produto->getDescricao()); ?>">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Resumo</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="resumo" name="resumo" placeholder="Resumo" required="required" value="<?php echo $this->produto->getResumo(); ?>">
+                                <input type="text" class="form-control" id="resumo" name="resumo" placeholder="Resumo" required="required" value="<?php echo utf8_decode($this->produto->getResumo()); ?>">
                             </div>
                         </div>
                         <div class="form-group">
@@ -88,7 +88,7 @@
                         <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Preço</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control dinheiro" id="valor" name="valor" placeholder="Preço" required="required" value="<?php echo $this->produto->getValor(); ?>">
+                                <input type="text" class="form-control dinheiro" id="valor" name="valor" placeholder="Preço" required="required" value="<?php echo trim($this->produto->getValor()); ?>">
                             </div>
                         </div>
                         <div class="form-group">
