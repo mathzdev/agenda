@@ -95,7 +95,7 @@
                                            title="Editar"><i class="fa fa-edit"></i> Editar</a>
                                         <a href="#delete" data-toggle="tooltip" data-placement="top" title="Deletar"
                                            class="delete_open btn btn-red btn-square"
-                                           onclick="deletaProduto(<?php echo $produto->getIdProduto(); ?>, '<?php echo utf8_encode($produto->getNome()); ?>');"
+                                           onclick="deletaProduto(<?php echo $produto->getIdProduto(); ?>, '<?php echo utf8_decode($produto->getNome()); ?>');"
                                            data-toggle="tooltip" data-placement="top" title="Deletar"><i
                                                 class="fa fa-trash-o"></i> Deletar</a>
                                     </td>
