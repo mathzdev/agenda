@@ -155,7 +155,7 @@ class Produto extends AbstractService
         }
 
         $entidade = $this->getRepository('Application\Entity\TbProduto')->find($idProduto);
-
+        
         if ($arrParam['img'] != null) {
             unlink('public' . $entidade->getImg());
         }
@@ -172,8 +172,6 @@ class Produto extends AbstractService
 
             if ($arrUpdate['img'] != null) {
                 $entidade->setImg($arrUpdate['img']);
-            } else {
-                $entidade->setImg('');
             }
 
             $this->getEntityManager()->persist($entidade);
